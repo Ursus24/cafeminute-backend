@@ -19,6 +19,6 @@ func main() {
 	e.GET("customerCount", customercount)
 	e.POST("customerEnters", customerenters)
 	e.POST("customerLeaves", customerleaves)
-	//test upload
+	//test upload +1
 	e.Logger.Fatal(e.Start(":1323"))
 }
