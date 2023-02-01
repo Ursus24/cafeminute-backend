@@ -23,7 +23,7 @@ func main() {
 	e.POST("customerLeaves", customerleaves)
 	e.POST("customerReset", customerreset)
 	e.POST("addProduct", addproduct)
-	e.POST("listProducts", listproducts)
+	e.GET("listProducts", listproducts)
 	e.POST("getProducts", getproducts)
 	e.Logger.Fatal(e.Start(":1323"))
 }
