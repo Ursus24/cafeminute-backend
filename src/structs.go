@@ -1,17 +1,8 @@
 package main
 
-import "gorm.io/gorm"
-
-type getMSG struct {
-	SERVERPSWD string `json:"spswd" xml:"spswd" form:"spswd" query:"spswd"`
-	Name       string `json:"by" xml:"by" form:"by" query:"by"`
-	PASSWORD   string `json:"pswd" xml:"pswd" form:"pswd" query:"pswd"`
-	SENDTO     string `json:"to" xml:"to" form:"to" query:"to"`
-}
-
-type Film struct {
-	gorm.Model
-	ID   uint `gorm:"primaryKey"`
-	Name string
-	IMDB int
+type addProduct struct {
+	title      string `json:"title" xml:"title" form:"title" query:"title"`
+	allergenic string `json:"allergenic" xml:"allergenic" form:"allergenic" query:"allergenic"`
+	prize      string `json:"prize" xml:"prize" form:"prize" query:"prize"`
+	descrition string `json:"description" xml:"description" form:"description" query:"description"`
 }
