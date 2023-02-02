@@ -6,3 +6,6 @@ type addProduct struct {
 	PRIZE       string `json:"prize" xml:"prize" form:"prize" query:"prize"`
 	DESCRIPTION string `json:"description" xml:"description" form:"description" query:"description"`
 }
+type getProduct struct {
+    ID       string `json:"id" xml:"id" form:"id" query:"id"`
+}
