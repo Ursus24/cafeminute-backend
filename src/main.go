@@ -25,7 +25,10 @@ func main() {
 	e.POST("addproduct", addproduct)
 	e.GET("listproducts", listproducts)
 	e.GET("getproducts", getproducts)
-    e.GET("getproduct", getproduct)
-    e.DELETE("removeproduct", removeproduct)
+	e.GET("getproduct", getproduct)
+	e.GET("addnotification", addnotification)
+
+	e.DELETE("removeproduct", removeproduct)
+
 	e.Logger.Fatal(e.Start(":1323"))
 }
