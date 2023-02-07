@@ -27,6 +27,7 @@ func main() {
 	e.GET("getproducts", getproducts)
 	e.GET("getproduct", getproduct)
 	e.GET("addnotification", addnotification)
+	e.GET("getnotificitations", getnotifications)
 	e.GET("getproductids", getproductids)
 	e.DELETE("removeproduct", removeproduct)
 
