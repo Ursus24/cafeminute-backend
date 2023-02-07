@@ -10,9 +10,9 @@ func checkDate(d string) bool {
 
 	s := strings.Split(d, ("."))
 
-	day, _ := strconv.ParseInt(s[1], 10, 0)
-	month, _ := strconv.ParseInt(s[2], 10, 0)
-	year, _ := strconv.ParseInt(s[3], 10, 0)
+	day, _ := strconv.ParseInt(s[0], 10, 0)
+	month, _ := strconv.ParseInt(s[1], 10, 0)
+	year, _ := strconv.ParseInt(s[2], 10, 0)
 
 	if day > 31 {
 		correct = false
@@ -32,7 +32,7 @@ func checkDate(d string) bool {
 func checkTime(d string) bool {
 	correct := true
 
-	s := strings.Split(d, ("."))
+	s := strings.Split(d, (":"))
 
 	hour, _ := strconv.ParseInt(s[1], 10, 0)
 	minutes, _ := strconv.ParseInt(s[2], 10, 0)
