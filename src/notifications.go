@@ -18,11 +18,11 @@ func addnotification(c echo.Context) error {
 	}
 
 	if checkDate(n.DATE) == false {
-		return c.String(http.StatusOK, "date is not an date. check input")
+		return c.String(http.StatusOK, "date is not a date. check input")
 	}
 
 	if checkTime(n.TIME) == false {
-		return c.String(http.StatusOK, "time is not an time. check input")
+		return c.String(http.StatusOK, "time is not a time. check input")
 	}
 
 	storeNotification(n.HEADING, n.CONTENT, n.DATE, n.TIME)
