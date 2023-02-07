@@ -27,7 +27,7 @@ func main() {
 	e.GET("getproducts", getproducts)
 	e.GET("getproduct", getproduct)
 	e.GET("addnotification", addnotification)
-
+	e.GET("getproductids", getproductids)
 	e.DELETE("removeproduct", removeproduct)
 
 	e.Logger.Fatal(e.Start(":1323"))

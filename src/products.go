@@ -14,6 +14,20 @@ import (
 	//"gorm.io/gorm"
 )
 
+func getproductids(c echo.Context) error {
+	var products = []string{}
+	files, err := os.ReadDir("products/")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	for _, f := range files {
+		prdct := fmt.Sprint(f.Name())
+		products = append(products, prdct)
+	}
+
+	return c.String(http.StatusOK, strings.Join(products, ","))
+}
 func addproduct(c echo.Context) error {
 	p := new(addProduct)
 	if err := c.Bind(p); err != nil {
@@ -35,17 +49,20 @@ func getproduct(c echo.Context) error {
 		return c.String(http.StatusOK, ("invalid ID"))
 	}
 	var product = []string{}
-	prdct := fmt.Sprint(p.ID + ": " + readKeyUnsafe("name", "products/"+p.ID+"/"))
+	prdct := fmt.Sprint(p.ID + ": " + readKeyUnsafe("name", "products/"+p.ID+"/") + ";")
 	product = append(product, prdct)
-	prdct = fmt.Sprintln(p.ID + ": " + readKeyUnsafe("title", "products/"+p.ID+"/"))
+	prdct = fmt.Sprintln(p.ID + ": " + readKeyUnsafe("title", "products/"+p.ID+"/") + ";")
 	product = append(product, prdct)
-	prdct = fmt.Sprintln(p.ID + ": " + readKeyUnsafe("prize", "products/"+p.ID+"/"))
+	prdct = fmt.Sprintln(p.ID + ": " + readKeyUnsafe("prize", "products/"+p.ID+"/") + ";")
 	product = append(product, prdct)
 	if readKeyUnsafe("allergenic", "products/"+p.ID+"/") != "" {
-		prdct = fmt.Sprintln(p.ID + ": " + readKeyUnsafe("allergenic", "products/"+p.ID+"/"))
+		prdct = fmt.Sprintln(p.ID + ": " + readKeyUnsafe("allergenic", "products/"+p.ID+"/") + ";")
+		product = append(product, prdct)
+	} else {
+		prdct = fmt.Sprintln(p.ID + ": " + "nv" + ";")
 		product = append(product, prdct)
 	}
-	prdct = fmt.Sprintln(p.ID + ": " + readKeyUnsafe("description", "products/"+p.ID+"/"))
+	prdct = fmt.Sprintln(p.ID + ": " + readKeyUnsafe("description", "products/"+p.ID+"/") + ";")
 	product = append(product, prdct)
 	return c.String(http.StatusOK, strings.Join(product, ""))
 }
