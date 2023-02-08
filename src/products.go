@@ -103,10 +103,10 @@ func getproducts(c echo.Context) error {
         }
         prdct = fmt.Sprintln(f.Name() + ": " + readKeyUnsafe("description", "products/"+f.Name()+"/") + ";")
 		product = append(product, prdct)
-		joined := strings.Join(product, "|")
+		joined := strings.Join(product, "")
 		products = append(products, joined)
 	}
-	return c.String(http.StatusOK, strings.Join(products, "\n"))
+	return c.String(http.StatusOK, strings.Join(products, "|\n"))
 }
 
 func listproducts(c echo.Context) error {
