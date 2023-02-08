@@ -5,6 +5,8 @@ type addProduct struct {
 	ALLERGENIC  string `json:"allergenic" xml:"allergenic" form:"allergenic" query:"allergenic"`
 	PRIZE       string `json:"prize" xml:"prize" form:"prize" query:"prize"`
 	DESCRIPTION string `json:"description" xml:"description" form:"description" query:"description"`
+	SALE        string `json:"sale" xml:"sale" form:"sale" query:"sale"`
+	CALORIES    string `json:"calories" xml:"calories" form:"calories" query:"calories"`
 }
 
 type getProduct struct {
@@ -17,3 +19,5 @@ type addNotification struct {
 	DATE    string `json:"date" xml:"date" form:"date" query:"date"`
 	TIME    string `json:"time" xml:"time" form:"time" query:"time"`
 }
+
+var daysMonth = [12]int{31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31}

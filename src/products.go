@@ -10,8 +10,6 @@ import (
 
 	"github.com/dchest/uniuri"
 	"github.com/labstack/echo/v4"
-	//"gorm.io/driver/sqlite"
-	//"gorm.io/gorm"
 )
 
 func getproductids(c echo.Context) error {
@@ -33,10 +31,10 @@ func addproduct(c echo.Context) error {
 	if err := c.Bind(p); err != nil {
 		return err
 	}
-	if p.TITLE == "" || p.PRIZE == "" || p.DESCRIPTION == "" {
+	if p.TITLE == "" || p.PRIZE == "" || p.DESCRIPTION == "" || p.CALORIES == "" {
 		return c.String(http.StatusOK, "incomplete data. Missing something?")
 	}
-	storeProduct(p.TITLE, p.PRIZE, p.ALLERGENIC, p.DESCRIPTION)
+	storeProduct(p.TITLE, p.PRIZE, p.ALLERGENIC, p.DESCRIPTION, p.CALORIES, p.SALE)
 	return c.String(http.StatusOK, "success")
 }
 
@@ -88,20 +86,32 @@ func getproducts(c echo.Context) error {
 
 	for _, f := range files {
 		var product = []string{}
-        prdct := fmt.Sprint(f.Name() + ": " + readKeyUnsafe("name", "products/"+f.Name()+"/") + ";")
+		prdct := fmt.Sprint(f.Name() + ": " + readKeyUnsafe("name", "products/"+f.Name()+"/") + ";")
 		product = append(product, prdct)
-        prdct = fmt.Sprintln(f.Name() + ": " + readKeyUnsafe("title", "products/"+f.Name()+"/") + ";")
+		prdct = fmt.Sprintln(f.Name() + ": " + readKeyUnsafe("title", "products/"+f.Name()+"/") + ";")
 		product = append(product, prdct)
-        prdct = fmt.Sprintln(f.Name() + ": " + readKeyUnsafe("prize", "products/"+f.Name()+"/") + ";")
+		prdct = fmt.Sprintln(f.Name() + ": " + readKeyUnsafe("prize", "products/"+f.Name()+"/") + ";")
 		product = append(product, prdct)
+		prdct = fmt.Sprintln(f.Name() + ": " + readKeyUnsafe("calories", "products/"+f.Name()+"/") + ";")
+		product = append(product, prdct)
+
 		if readKeyUnsafe("allergenic", "products/"+f.Name()+"/") != "" {
 			prdct = fmt.Sprintln(f.Name() + ": " + readKeyUnsafe("allergenic", "products/"+f.Name()+"/") + ";")
 			product = append(product, prdct)
-		}else{
-            prdct = fmt.Sprintln(f.Name() + ": " + "nv" + ";")
-            product = append(product, prdct)
-        }
-        prdct = fmt.Sprintln(f.Name() + ": " + readKeyUnsafe("description", "products/"+f.Name()+"/") + ";")
+		} else {
+			prdct = fmt.Sprintln(f.Name() + ": " + "nv" + ";")
+			product = append(product, prdct)
+		}
+
+		if readKeyUnsafe("sale", "products/"+f.Name()+"/") != "" {
+			prdct = fmt.Sprintln(f.Name() + ": " + readKeyUnsafe("sale", "products/"+f.Name()+"/") + ";")
+			product = append(product, prdct)
+		} else {
+			prdct = fmt.Sprintln(f.Name() + ": " + "nv" + ";")
+			product = append(product, prdct)
+		}
+
+		prdct = fmt.Sprintln(f.Name() + ": " + readKeyUnsafe("description", "products/"+f.Name()+"/") + ";")
 		product = append(product, prdct)
 		joined := strings.Join(product, "")
 		products = append(products, joined)
@@ -124,7 +134,7 @@ func listproducts(c echo.Context) error {
 	return c.String(http.StatusOK, strings.Join(products, ""))
 }
 
-func storeProduct(title string, prize string, allergenic string, description string) {
+func storeProduct(title string, prize string, allergenic string, description string, calories string, sale string) {
 	id := genIDproduct()
 	createDir("products/" + id)
 	addKeyUnsafe("title", title, "products/"+id)
@@ -133,6 +143,11 @@ func storeProduct(title string, prize string, allergenic string, description str
 	if allergenic != "" {
 		addKeyUnsafe("allergenic", allergenic, "products/"+id)
 	}
+
+	if sale != "" {
+		addKeyUnsafe("sale", sale, "products/"+id)
+	}
+
 	addKeyUnsafe("description", description, "products/"+id)
 
 }
