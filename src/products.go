@@ -88,19 +88,22 @@ func getproducts(c echo.Context) error {
 
 	for _, f := range files {
 		var product = []string{}
-		prdct := fmt.Sprint(f.Name() + ": " + readKeyUnsafe("name", "products/"+f.Name()+"/"))
+        prdct := fmt.Sprint(f.Name() + ": " + readKeyUnsafe("name", "products/"+f.Name()+"/") + ";")
 		product = append(product, prdct)
-		prdct = fmt.Sprintln(f.Name() + ": " + readKeyUnsafe("title", "products/"+f.Name()+"/"))
+        prdct = fmt.Sprintln(f.Name() + ": " + readKeyUnsafe("title", "products/"+f.Name()+"/") + ";")
 		product = append(product, prdct)
-		prdct = fmt.Sprintln(f.Name() + ": " + readKeyUnsafe("prize", "products/"+f.Name()+"/"))
+        prdct = fmt.Sprintln(f.Name() + ": " + readKeyUnsafe("prize", "products/"+f.Name()+"/") + ";")
 		product = append(product, prdct)
 		if readKeyUnsafe("allergenic", "products/"+f.Name()+"/") != "" {
-			prdct = fmt.Sprintln(f.Name() + ": " + readKeyUnsafe("allergenic", "products/"+f.Name()+"/"))
+			prdct = fmt.Sprintln(f.Name() + ": " + readKeyUnsafe("allergenic", "products/"+f.Name()+"/") + ";")
 			product = append(product, prdct)
-		}
-		prdct = fmt.Sprintln(f.Name() + ": " + readKeyUnsafe("description", "products/"+f.Name()+"/"))
+		}else{
+            prdct = fmt.Sprintln(f.Name() + ": " + "nv" + ";")
+            product = append(product, prdct)
+        }
+        prdct = fmt.Sprintln(f.Name() + ": " + readKeyUnsafe("description", "products/"+f.Name()+"/") + ";")
 		product = append(product, prdct)
-		joined := strings.Join(product, "")
+		joined := strings.Join(product, "|")
 		products = append(products, joined)
 	}
 	return c.String(http.StatusOK, strings.Join(products, "\n"))
