@@ -29,6 +29,7 @@ func readKey(key string, dir string) string {
 		if err != nil {
 			fmt.Println(err)
 		}
+		file.Close()
 		return string(result)
 	}
 	return ""
@@ -109,6 +110,7 @@ func readKeyUnsafe(key string, dir string) string {
 		if err != nil {
 			fmt.Println(err)
 		}
+		file.Close()
 		return ret
 	}
 	return ""

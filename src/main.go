@@ -15,21 +15,21 @@ func main() {
 	e.GET("/", func(c echo.Context) error {
 		return c.String(http.StatusOK, "Root Route!")
 	})
-	e.GET("isopen", isopen)
-	e.POST("setopen", setopen)
-	e.POST("setclosed", setclosed)
-	e.GET("customercount", customercount)
-	e.POST("customerenters", customerenters)
-	e.POST("customerleaves", customerleaves)
-	e.POST("customerreset", customerreset)
-	e.POST("addproduct", addproduct)
-	e.GET("listproducts", listproducts)
-	e.GET("getproducts", getproducts)
-	e.GET("getproduct", getproduct)
-	e.GET("addnotification", addnotification)
-	e.GET("getnotificitations", getnotifications)
-	e.GET("getproductids", getproductids)
-	e.DELETE("removeproduct", removeproduct)
+	e.GET("isopen", isopen)                       //working
+	e.POST("setopen", setopen)                    //working
+	e.POST("setclosed", setclosed)                //working
+	e.GET("customercount", customercount)         //working
+	e.POST("customerenters", customerenters)      //working
+	e.POST("customerleaves", customerleaves)      //working
+	e.POST("customerreset", customerreset)        //working
+	e.GET("listproducts", listproducts)           //working
+	e.GET("getproducts", getproducts)             //working
+	e.GET("getproduct", getproduct)               //working
+	e.GET("getproductids", getproductids)         //working
+	e.POST("addproduct", addproduct)              //working
+	e.DELETE("removeproduct", removeproduct)      //working
+	e.GET("getnotificitations", getnotifications) //returned nur heading
+	e.POST("addnotification", addnotification)    //working
 
-	e.Logger.Fatal(e.Start(":1323"))
+	e.Logger.Fatal(e.Start(":1312"))
 }
