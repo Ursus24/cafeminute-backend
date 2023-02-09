@@ -1,0 +1,348 @@
+{
+	"info": {
+		"_postman_id": "4a44e16d-0f13-4f5c-adaf-0c6bcc388eb1",
+		"name": "Cafe Minute",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24418091"
+	},
+	"item": [
+		{
+			"name": "open_close",
+			"item": [
+				{
+					"name": "isopen",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url_base}}/isopen",
+							"host": [
+								"{{url_base}}"
+							],
+							"path": [
+								"isopen"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "setopen",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url_base}}/setopen",
+							"host": [
+								"{{url_base}}"
+							],
+							"path": [
+								"setopen"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "setclosed",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url_base}}/setclosed",
+							"host": [
+								"{{url_base}}"
+							],
+							"path": [
+								"setclosed"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "usercount",
+			"item": [
+				{
+					"name": "customercount",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url_base}}/customercount",
+							"host": [
+								"{{url_base}}"
+							],
+							"path": [
+								"customercount"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "customerenters",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url_base}}/customerenters",
+							"host": [
+								"{{url_base}}"
+							],
+							"path": [
+								"customerenters"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "customerleaves",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url_base}}/customerleaves",
+							"host": [
+								"{{url_base}}"
+							],
+							"path": [
+								"customerleaves"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "customerreset",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url_base}}/customerreset",
+							"host": [
+								"{{url_base}}"
+							],
+							"path": [
+								"customerreset"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "products",
+			"item": [
+				{
+					"name": "listproducts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url_base}}/listproducts",
+							"host": [
+								"{{url_base}}"
+							],
+							"path": [
+								"listproducts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getproducts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url_base}}/getproducts",
+							"host": [
+								"{{url_base}}"
+							],
+							"path": [
+								"getproducts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getproduct",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\" : \"032Qv\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_base}}/getproduct",
+							"host": [
+								"{{url_base}}"
+							],
+							"path": [
+								"getproduct"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getproductids",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "addproduct",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\" : \"evilcrepes\",\n    \"prize\" : \"666\",\n    \"description\" : \"dont buy it its evil\",\n    \"calories\" : \"666\",\n    \"allergenic\" : \"all\",\n    \"sale\" : \"666\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_base}}/addproduct",
+							"host": [
+								"{{url_base}}"
+							],
+							"path": [
+								"addproduct"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "removeproduct",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\" : \"032Qv\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_base}}/removeproduct",
+							"host": [
+								"{{url_base}}"
+							],
+							"path": [
+								"removeproduct"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "notifications",
+			"item": [
+				{
+					"name": "getnotificitations",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "addnotification",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"heading\" : \"len stinkt\",\n    \"content\" : \"len developer der Cafe Minute App stinkt\",\n    \"date\" : \"13.12.2023\",\n    \"time\" : \"18:23\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_base}}/addnotification",
+							"host": [
+								"{{url_base}}"
+							],
+							"path": [
+								"addnotification"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url_base",
+			"value": "http://127.0.0.1:1312",
+			"type": "string"
+		}
+	]
+}
