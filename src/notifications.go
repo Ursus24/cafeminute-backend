@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"log"
 	"net/http"
@@ -31,6 +32,11 @@ func addnotification(c echo.Context) error {
 	storeNotification(n.HEADING, n.CONTENT, n.DATE, n.TIME)
 	return c.String(http.StatusOK, "success")
 }
+
+func changenotifications(c echo.Context) error {
+	return c.String(http.StatusOK, "coming soon")
+}
+
 func getnotifications(c echo.Context) error {
 	var products = []string{}
 	files, err := os.ReadDir("notifications/")
@@ -53,6 +59,19 @@ func getnotifications(c echo.Context) error {
 	}
 	return c.String(http.StatusOK, strings.Join(products, "|"))
 }
+
+func removenotification(c echo.Context) error {
+	p := new(getProduct)
+	if err := c.Bind(p); err != nil {
+		return err
+	}
+	if _, err := os.Stat("notifications/" + string(p.ID)); errors.Is(err, os.ErrNotExist) {
+		return c.String(http.StatusOK, ("invalid ID"))
+	}
+	_ = os.RemoveAll("notifications/" + p.ID)
+	return c.String(http.StatusOK, ("removed"))
+}
+
 func storeNotification(heading string, content string, date string, time string) {
 	id := genIDnotifications()
 	createDir("notifications/" + id)

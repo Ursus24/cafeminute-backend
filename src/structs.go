@@ -7,6 +7,7 @@ type addProduct struct {
 	DESCRIPTION string `json:"description" xml:"description" form:"description" query:"description"`
 	SALE        string `json:"sale" xml:"sale" form:"sale" query:"sale"`
 	CALORIES    string `json:"calories" xml:"calories" form:"calories" query:"calories"`
+	IMAGE       string `json:"IMAGE" xml:"IMAGE" form:"IMAGE" query:"IMAGE"`
 }
 
 type getProduct struct {

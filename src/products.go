@@ -26,16 +26,21 @@ func getproductids(c echo.Context) error {
 
 	return c.String(http.StatusOK, strings.Join(products, ","))
 }
+
 func addproduct(c echo.Context) error {
 	p := new(addProduct)
 	if err := c.Bind(p); err != nil {
 		return err
 	}
-	if p.TITLE == "" || p.PRIZE == "" || p.DESCRIPTION == "" || p.CALORIES == "" {
+	if p.TITLE == "" || p.PRIZE == "" || p.DESCRIPTION == "" || p.CALORIES == "" || p.IMAGE == "" {
 		return c.String(http.StatusOK, "incomplete data. Missing something?")
 	}
-	storeProduct(p.TITLE, p.PRIZE, p.ALLERGENIC, p.DESCRIPTION, p.CALORIES, p.SALE)
+	storeProduct(p.TITLE, p.PRIZE, p.ALLERGENIC, p.DESCRIPTION, p.CALORIES, p.SALE, p.IMAGE)
 	return c.String(http.StatusOK, "success")
+}
+
+func changeproduct(c echo.Context) error {
+	return c.String(http.StatusOK, "coming soon")
 }
 
 func getproduct(c echo.Context) error {
@@ -94,6 +99,8 @@ func getproducts(c echo.Context) error {
 		product = append(product, prdct)
 		prdct = fmt.Sprintln(f.Name() + ": " + readKeyUnsafe("calories", "products/"+f.Name()+"/") + ";")
 		product = append(product, prdct)
+		prdct = fmt.Sprintln(f.Name() + ": " + readKeyUnsafe("image", "products/"+f.Name()+"/") + ";")
+		product = append(product, prdct)
 
 		if readKeyUnsafe("allergenic", "products/"+f.Name()+"/") != "" {
 			prdct = fmt.Sprintln(f.Name() + ": " + readKeyUnsafe("allergenic", "products/"+f.Name()+"/") + ";")
@@ -134,12 +141,16 @@ func listproducts(c echo.Context) error {
 	return c.String(http.StatusOK, strings.Join(products, ""))
 }
 
-func storeProduct(title string, prize string, allergenic string, description string, calories string, sale string) {
+func storeProduct(title string, prize string, allergenic string, description string, calories string, sale string, image string) {
 	id := genIDproduct()
+
 	createDir("products/" + id)
+
 	addKeyUnsafe("title", title, "products/"+id)
 	addKeyUnsafe("prize", prize, "products/"+id)
 	addKeyUnsafe("name", genName(title), "products/"+id)
+	addKeyUnsafe("image", image, "products/"+id)
+
 	if allergenic != "" {
 		addKeyUnsafe("allergenic", allergenic, "products/"+id)
 	}
