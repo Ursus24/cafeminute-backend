@@ -28,7 +28,7 @@ func main() {
 	e.GET("getproductids", getproductids)         //working
 	e.POST("addproduct", addproduct)              //working
 	e.DELETE("removeproduct", removeproduct)      //working
-	e.GET("getnotificitations", getnotifications) //returned nur heading
+	e.GET("getnotificitations", getnotifications) //expected to work
 	e.POST("addnotification", addnotification)    //working
 
 	e.Logger.Fatal(e.Start(":1312"))
