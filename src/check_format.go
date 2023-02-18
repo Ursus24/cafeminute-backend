@@ -3,6 +3,7 @@ package main
 import (
 	"strconv"
 	"strings"
+	"time"
 	"unicode"
 )
 
@@ -76,4 +77,16 @@ func isInt(st string) bool {
 		}
 	}
 	return true
+}
+func parseDate(date string, rawtime string) time.Time {
+	s := strings.Split(date, ("."))
+	day := s[0]
+	month := s[1]
+	year := s[2]
+	t := strings.Split(rawtime, (":"))
+	hour := t[0]
+	minute := t[1]
+	frmtd := year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + "00"
+	vl, _ := time.Parse("2006-01-02 15:04:05", frmtd)
+	return vl
 }
