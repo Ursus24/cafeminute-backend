@@ -150,7 +150,7 @@ func storeProduct(title string, prize string, allergenic string, description str
 	addKeyUnsafe("prize", prize, "products/"+id)
 	addKeyUnsafe("name", genName(title), "products/"+id)
 	addKeyUnsafe("image", image, "products/"+id)
-
+	addKeyUnsafe("calories", calories, "products/"+id)
 	if allergenic != "" {
 		addKeyUnsafe("allergenic", allergenic, "products/"+id)
 	}
