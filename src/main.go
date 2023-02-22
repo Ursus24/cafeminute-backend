@@ -33,6 +33,7 @@ func main() {
 	e.POST("changenotifications", changenotifications)
 	e.POST("addnotification", addnotification) //working
 	e.DELETE("removenotification", removenotification)
+	e.GET("fetchnotification", fetchnotification)
 
 	e.Logger.Fatal(e.Start(":1312"))
 }
