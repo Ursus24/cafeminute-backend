@@ -1,30 +1,14 @@
 {
 	"info": {
-		"_postman_id": "85fc12c5-1806-413f-9d36-c8566718684b",
+		"_postman_id": "319de6d2-2799-4075-a5df-5008896c60c3",
 		"name": "Cafe Minute",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24418091"
 	},
 	"item": [
 		{
 			"name": "open_close",
 			"item": [
-				{
-					"name": "isopen",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{url_base}}/isopen",
-							"host": [
-								"{{url_base}}"
-							],
-							"path": [
-								"isopen"
-							]
-						}
-					},
-					"response": []
-				},
 				{
 					"name": "setopen",
 					"request": {
@@ -58,29 +42,29 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "isopen",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url_base}}/isopen",
+							"host": [
+								"{{url_base}}"
+							],
+							"path": [
+								"isopen"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
 		{
 			"name": "usercount",
 			"item": [
-				{
-					"name": "customercount",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{url_base}}/customercount",
-							"host": [
-								"{{url_base}}"
-							],
-							"path": [
-								"customercount"
-							]
-						}
-					},
-					"response": []
-				},
 				{
 					"name": "customerenters",
 					"request": {
@@ -135,12 +119,72 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "customercount",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url_base}}/customercount",
+							"host": [
+								"{{url_base}}"
+							],
+							"path": [
+								"customercount"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
 		{
 			"name": "products",
 			"item": [
+				{
+					"name": "addproduct",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\" : \"lenspizza\",\n    \"prize\" : \"50\",\n    \"description\" : \"len loves it\",\n    \"calories\" : \"700\",\n    \"allergenic\" : \"\",\n    \"sale\" : \"\",\n    \"image\" : \"bespiel lol lelellele\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_base}}/addproduct",
+							"host": [
+								"{{url_base}}"
+							],
+							"path": [
+								"addproduct"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "changeproduct",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url_base}}/changeproduct",
+							"host": [
+								"{{url_base}}"
+							],
+							"path": [
+								"changeproduct"
+							]
+						}
+					},
+					"response": []
+				},
 				{
 					"name": "listproducts",
 					"request": {
@@ -185,7 +229,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"id\" : \"032Qv\"\n}",
+							"raw": "{\n    \"id\" : \"WBKYT\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -210,32 +254,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": ""
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "addproduct",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"title\" : \"evilcrepes\",\n    \"prize\" : \"666\",\n    \"description\" : \"dont buy it its evil\",\n    \"calories\" : \"666\",\n    \"allergenic\" : \"all\",\n    \"sale\" : \"666\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{url_base}}/addproduct",
+							"raw": "{{url_base}}/getproductids",
 							"host": [
 								"{{url_base}}"
 							],
 							"path": [
-								"addproduct"
+								"getproductids"
 							]
 						}
 					},
@@ -248,7 +272,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"id\" : \"032Qv\"\n}",
+							"raw": "{\n    \"id\" : \"WBKYT\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -273,17 +297,6 @@
 			"name": "notifications",
 			"item": [
 				{
-					"name": "getnotificitations",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": ""
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "addnotification",
 					"event": [
 						{
@@ -301,7 +314,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"heading\" : \"WIEDER GEDUSCHT\",\n    \"content\" : \"Urs hat sich nach Jahren wieder Geduscht\",\n    \"date\" : \"13.12.2023\",\n    \"time\" : \"18:23\"\n}",
+							"raw": "{\n    \"heading\" : \"len stinkt\",\n    \"content\" : \"len developer der Cafe Minute App stinkt\",\n    \"date\" : \"13.12.2023\",\n    \"time\" : \"18:23\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -315,6 +328,184 @@
 							],
 							"path": [
 								"addnotification"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "changenotification",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url_base}}/changenotification",
+							"host": [
+								"{{url_base}}"
+							],
+							"path": [
+								"changenotification"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getnotificitations",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "removenotification",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\" : \"77078\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_base}}/removenotification",
+							"host": [
+								"{{url_base}}"
+							],
+							"path": [
+								"removenotification"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "news",
+			"item": [
+				{
+					"name": "addnews",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"heading\" : \"len stinkt\",\n    \"content\" : \"len developer der Cafe Minute App stinkt\",\n    \"date\" : \"13.12.2023\",\n    \"image\" : \"sollte link sein lel\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_base}}/addnews",
+							"host": [
+								"{{url_base}}"
+							],
+							"path": [
+								"addnews"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "changenews",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url_base}}/changenews",
+							"host": [
+								"{{url_base}}"
+							],
+							"path": [
+								"changenews"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getnewsids",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url_base}}/getnewsids",
+							"host": [
+								"{{url_base}}"
+							],
+							"path": [
+								"getnewsids"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getnews",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url_base}}/getnews",
+							"host": [
+								"{{url_base}}"
+							],
+							"path": [
+								"getnews"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getallnews",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "listnews",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "removenews",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\" : \"45706\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_base}}/removenews",
+							"host": [
+								"{{url_base}}"
+							],
+							"path": [
+								"removenews"
 							]
 						}
 					},
