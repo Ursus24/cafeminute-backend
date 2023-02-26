@@ -162,6 +162,7 @@ func storeProduct(title string, prize string, allergenic string, description str
 	addKeyUnsafe("description", description, "products/"+id)
 
 }
+
 func genIDproduct() string {
 	res := uniuri.NewLen(5)
 	if _, err := os.Stat("products/" + res); !os.IsNotExist(err) {

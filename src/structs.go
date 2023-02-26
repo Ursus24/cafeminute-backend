@@ -1,5 +1,7 @@
 package main
 
+var daysMonth = [12]int{31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31}
+
 type addProduct struct {
 	TITLE       string `json:"title" xml:"title" form:"title" query:"title"`
 	ALLERGENIC  string `json:"allergenic" xml:"allergenic" form:"allergenic" query:"allergenic"`
@@ -21,4 +23,8 @@ type addNotification struct {
 	TIME    string `json:"time" xml:"time" form:"time" query:"time"`
 }
 
-var daysMonth = [12]int{31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31}
+type addNews struct {
+	HEADING string `json:"heading" xml:"heading" form:"heading" query:"heading"`
+	CONTENT string `json:"content" xml:"content" form:"content" query:"content"`
+	IMAGE   string `json:"image" xml:"image" form:"image" query:"image"`
+}
