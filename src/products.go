@@ -40,7 +40,16 @@ func addproduct(c echo.Context) error {
 }
 
 func changeproduct(c echo.Context) error {
-	return c.String(http.StatusOK, "coming soon")
+	p := new(changeProduct)
+	if err := c.Bind(p); err != nil {
+		return err
+	}
+	if p.ID == "" || p.KEY == "" || p.VALUE == "" {
+		return c.String(http.StatusOK, "incomplete data. Missing something?")
+	}
+	dir := "products/" + p.ID
+	changeKeyUnsafe(dir, p.KEY, p.VALUE)
+	return c.String(http.StatusOK, "success")
 }
 
 func getproduct(c echo.Context) error {

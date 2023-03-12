@@ -25,18 +25,18 @@ func main() {
 	e.POST("customerreset", customerreset)   //working
 	e.GET("customercount", customercount)    //working
 
-	e.POST("addproduct", addproduct)         //working
-	e.POST("changeproduct", changeproduct)   //working
-	e.GET("listproducts", listproducts)      //working
-	e.GET("getproducts", getproducts)        //working
-	e.GET("getproduct", getproduct)          //working
-	e.GET("getproductids", getproductids)    //working
+	e.POST("addproduct", addproduct)    //working
+	e.GET("listproducts", listproducts) //working
+	e.GET("getproducts", getproducts)   //working
+	e.GET("getproduct", getproduct)     //working
+	e.GET("getproductids", getproductids)
+	e.PATCH("changeproduct", changeproduct)
 	e.DELETE("removeproduct", removeproduct) //working
 
-	e.POST("changenotifications", changenotifications)
 	e.POST("addnotification", addnotification)  //working
 	e.GET("getnotifications", getnotifications) //working
 	e.GET("fetchnotification", fetchnotification)
+	e.PATCH("changenotification", changenotification)
 	e.DELETE("removenotification", removenotification)
 
 	e.POST("addnews", addnews)
@@ -44,6 +44,7 @@ func main() {
 	e.GET("getnews", getnews)
 	e.GET("getallnews", getallnews)
 	e.GET("listnews", listnews)
+	e.PATCH("changenews", changenews)
 	e.DELETE("removenews", removenews)
 
 	e.Logger.Fatal(e.Start(":1312"))

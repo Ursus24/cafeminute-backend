@@ -39,58 +39,67 @@ func addnotification(c echo.Context) error {
 }
 func fetchnotification(c echo.Context) error {
 	id := NotificationExists(time.Now().Format("2006-01-02 15:04"))
-	var products = []string{}
+	var notifications = []string{}
 	if id == "nv" {
 		return c.String(http.StatusOK, "nv")
 	} else {
-		var product = []string{}
-		prdct := fmt.Sprint(id + ": " + readKeyUnsafe("heading", "notifications/"+id+"/") + ";")
-		product = append(product, prdct)
-		prdct = fmt.Sprintln(id + ": " + readKeyUnsafe("content", "notifications/"+id+"/") + ";")
-		product = append(product, prdct)
-		prdct = fmt.Sprintln(id + ": " + readKeyUnsafe("date", "notifications/"+id+"/") + ";")
-		product = append(product, prdct)
-		prdct = fmt.Sprintln(id + ": " + readKeyUnsafe("time", "notifications/"+id+"/") + ";")
-		product = append(product, prdct)
-		prdct = fmt.Sprintln(id + ": " + parseDate(readKeyUnsafe("date", "notifications/"+id+"/"), readKeyUnsafe("time", "notifications/"+id+"/")).String() + ";")
-		product = append(product, prdct)
-		joined := strings.Join(product, "")
-		products = append(products, joined)
-		return c.String(http.StatusOK, strings.Join(products, "|"))
+		var notification = []string{}
+		ntfctn := fmt.Sprint(id + ": " + readKeyUnsafe("heading", "notifications/"+id+"/") + ";")
+		notification = append(notification, ntfctn)
+		ntfctn = fmt.Sprintln(id + ": " + readKeyUnsafe("content", "notifications/"+id+"/") + ";")
+		notification = append(notification, ntfctn)
+		ntfctn = fmt.Sprintln(id + ": " + readKeyUnsafe("date", "notifications/"+id+"/") + ";")
+		notification = append(notification, ntfctn)
+		ntfctn = fmt.Sprintln(id + ": " + readKeyUnsafe("time", "notifications/"+id+"/") + ";")
+		notification = append(notification, ntfctn)
+		ntfctn = fmt.Sprintln(id + ": " + parseDate(readKeyUnsafe("date", "notifications/"+id+"/"), readKeyUnsafe("time", "notifications/"+id+"/")).String() + ";")
+		notification = append(notification, ntfctn)
+		joined := strings.Join(notification, "")
+		notifications = append(notification, joined)
+		return c.String(http.StatusOK, strings.Join(notifications, "|"))
 	}
 }
 
-func changenotifications(c echo.Context) error {
-	return c.String(http.StatusOK, "coming soon")
+func changenotification(c echo.Context) error {
+	p := new(changeNotifications)
+	if err := c.Bind(p); err != nil {
+		return err
+	}
+	if p.ID == "" || p.KEY == "" || p.VALUE == "" {
+		return c.String(http.StatusOK, "incomplete data. Missing something?")
+	}
+	dir := "notifications/" + p.ID
+	changeKeyUnsafe(dir, p.KEY, p.VALUE)
+	return c.String(http.StatusOK, "success")
 }
 
 func getnotifications(c echo.Context) error {
-	var products = []string{}
+	var notification = []string{}
 	files, err := os.ReadDir("notifications/")
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	for _, f := range files {
-		var product = []string{}
-		prdct := fmt.Sprint(f.Name() + ": " + readKeyUnsafe("heading", "notifications/"+f.Name()+"/") + ";")
-		product = append(product, prdct)
-		prdct = fmt.Sprintln(f.Name() + ": " + readKeyUnsafe("content", "notifications/"+f.Name()+"/") + ";")
-		product = append(product, prdct)
-		prdct = fmt.Sprintln(f.Name() + ": " + readKeyUnsafe("date", "notifications/"+f.Name()+"/") + ";")
-		product = append(product, prdct)
-		prdct = fmt.Sprintln(f.Name() + ": " + readKeyUnsafe("time", "notifications/"+f.Name()+"/") + ";")
-		product = append(product, prdct)
-		prdct = fmt.Sprintln(f.Name() + ": " + parseDate(readKeyUnsafe("date", "notifications/"+f.Name()+"/"), readKeyUnsafe("time", "notifications/"+f.Name()+"/")).String() + ";")
-		product = append(product, prdct)
-		joined := strings.Join(product, "")
-		products = append(products, joined)
+		var notification = []string{}
+		ntfctn := fmt.Sprint(f.Name() + ": " + readKeyUnsafe("heading", "notifications/"+f.Name()+"/") + ";")
+		notification = append(notification, ntfctn)
+		ntfctn = fmt.Sprintln(f.Name() + ": " + readKeyUnsafe("content", "notifications/"+f.Name()+"/") + ";")
+		notification = append(notification, ntfctn)
+		ntfctn = fmt.Sprintln(f.Name() + ": " + readKeyUnsafe("date", "notifications/"+f.Name()+"/") + ";")
+		notification = append(notification, ntfctn)
+		ntfctn = fmt.Sprintln(f.Name() + ": " + readKeyUnsafe("time", "notifications/"+f.Name()+"/") + ";")
+		notification = append(notification, ntfctn)
+		ntfctn = fmt.Sprintln(f.Name() + ": " + parseDate(readKeyUnsafe("date", "notifications/"+f.Name()+"/"), readKeyUnsafe("time", "notifications/"+f.Name()+"/")).String() + ";")
+		notification = append(notification, ntfctn)
+		joined := strings.Join(notification, "")
+		notification = append(notification, joined)
 	}
-	return c.String(http.StatusOK, strings.Join(products, "|"))
+	return c.String(http.StatusOK, strings.Join(notification, "|"))
 }
 
 func removenotification(c echo.Context) error {
-	p := new(getProduct)
+	p := new(getNotification)
 	if err := c.Bind(p); err != nil {
 		return err
 	}

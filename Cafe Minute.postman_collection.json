@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "319de6d2-2799-4075-a5df-5008896c60c3",
+		"_postman_id": "8770d521-95ac-4cfc-a957-220a3507b5cd",
 		"name": "Cafe Minute",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "24418091"
@@ -169,23 +169,6 @@
 					"response": []
 				},
 				{
-					"name": "changeproduct",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"url": {
-							"raw": "{{url_base}}/changeproduct",
-							"host": [
-								"{{url_base}}"
-							],
-							"path": [
-								"changeproduct"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "listproducts",
 					"request": {
 						"method": "GET",
@@ -266,6 +249,32 @@
 					"response": []
 				},
 				{
+					"name": "changeproduct",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\" : \"\",\n    \"key\" : \"\",\n    \"value\" : \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_base}}/changeproduct",
+							"host": [
+								"{{url_base}}"
+							],
+							"path": [
+								"changeproduct"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "removeproduct",
 					"request": {
 						"method": "DELETE",
@@ -334,10 +343,30 @@
 					"response": []
 				},
 				{
+					"name": "getnotificitations",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "changenotification",
 					"request": {
-						"method": "POST",
+						"method": "PATCH",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\" : \"\",\n    \"key\" : \"\",\n    \"value\" : \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "{{url_base}}/changenotification",
 							"host": [
@@ -346,17 +375,6 @@
 							"path": [
 								"changenotification"
 							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "getnotificitations",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": ""
 						}
 					},
 					"response": []
@@ -419,23 +437,6 @@
 					"response": []
 				},
 				{
-					"name": "changenews",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"url": {
-							"raw": "{{url_base}}/changenews",
-							"host": [
-								"{{url_base}}"
-							],
-							"path": [
-								"changenews"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "getnewsids",
 					"request": {
 						"method": "GET",
@@ -485,7 +486,10 @@
 					"name": "getallnews",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": ""
+						}
 					},
 					"response": []
 				},
@@ -493,7 +497,36 @@
 					"name": "listnews",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "changenews",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\" : \"\",\n    \"key\" : \"\",\n    \"value\" : \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_base}}/changenews",
+							"host": [
+								"{{url_base}}"
+							],
+							"path": [
+								"changenews"
+							]
+						}
 					},
 					"response": []
 				},

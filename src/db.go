@@ -15,7 +15,6 @@ var (
 )
 
 func readKey(key string, dir string) string {
-	dir = "db/" + dir
 	if hasKey(key, dir) {
 		file, err := os.Open(dir + "/" + key)
 		if err != nil {
@@ -37,7 +36,6 @@ func readKey(key string, dir string) string {
 }
 
 func addKey(key string, value string, dir string) {
-	dir = "db/" + dir
 	ciphertext, err := EncryptGCM(crypto, []byte(value))
 	if err != nil {
 		fmt.Println(err)
@@ -59,7 +57,6 @@ func addKey(key string, value string, dir string) {
 
 }
 func removeKey(key string, dir string) {
-	dir = "db/" + dir
 	if hasKey(key, dir) {
 		err := os.Remove(dir + "/" + key)
 		if err != nil {
@@ -69,15 +66,17 @@ func removeKey(key string, dir string) {
 
 }
 
+func changeKeyUnsafe(key string, value string, dir string) {
+	removeKey(key, dir)
+	addKeyUnsafe(key, value, dir)
+}
+
 func changeKey(key string, value string, dir string) {
-	dir = "db/" + dir
 	removeKey(key, dir)
 	addKey(key, value, dir)
 }
 
 func hasKey(key string, dir string) bool {
-	dir = "db/" + dir
-
 	_, err := os.Stat(dir + "/" + key)
 	if err != nil {
 		if os.IsNotExist(err) {
@@ -88,7 +87,6 @@ func hasKey(key string, dir string) bool {
 }
 
 func addKeyUnsafe(key string, value string, dir string) {
-	dir = "db/" + dir
 	if err != nil {
 		fmt.Println(err)
 	}
@@ -109,7 +107,6 @@ func addKeyUnsafe(key string, value string, dir string) {
 
 }
 func readKeyUnsafe(key string, dir string) string {
-	dir = "db/" + dir
 	if hasKey(key, dir) {
 		file, err := os.Open(dir + "/" + key)
 		if err != nil {

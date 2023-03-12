@@ -12,10 +12,6 @@ type addProduct struct {
 	IMAGE       string `json:"IMAGE" xml:"IMAGE" form:"IMAGE" query:"IMAGE"`
 }
 
-type getProduct struct {
-	ID string `json:"id" xml:"id" form:"id" query:"id"`
-}
-
 type addNotification struct {
 	HEADING string `json:"heading" xml:"heading" form:"heading" query:"heading"`
 	CONTENT string `json:"content" xml:"content" form:"content" query:"content"`
@@ -27,4 +23,34 @@ type addNews struct {
 	HEADING string `json:"heading" xml:"heading" form:"heading" query:"heading"`
 	CONTENT string `json:"content" xml:"content" form:"content" query:"content"`
 	IMAGE   string `json:"image" xml:"image" form:"image" query:"image"`
+}
+
+type getProduct struct {
+	ID string `json:"id" xml:"id" form:"id" query:"id"`
+}
+
+type getNews struct {
+	ID string `json:"id" xml:"id" form:"id" query:"id"`
+}
+
+type getNotification struct {
+	ID string `json:"id" xml:"id" form:"id" query:"id"`
+}
+
+type changeNotifications struct {
+	ID    string `json:"id" xml:"id" form:"id" query:"id"`
+	KEY   string `json:"key" xml:"key" form:"key" query:"key"`
+	VALUE string `json:"value" xml:"value" form:"value" query:"value"`
+}
+
+type changeNews struct {
+	ID    string `json:"id" xml:"id" form:"id" query:"id"`
+	KEY   string `json:"key" xml:"key" form:"key" query:"key"`
+	VALUE string `json:"value" xml:"value" form:"value" query:"value"`
+}
+
+type changeProduct struct {
+	ID    string `json:"id" xml:"id" form:"id" query:"id"`
+	KEY   string `json:"key" xml:"key" form:"key" query:"key"`
+	VALUE string `json:"value" xml:"value" form:"value" query:"value"`
 }
