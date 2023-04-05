@@ -102,7 +102,6 @@ func getallnews(c echo.Context) error {
 	for _, f := range files {
 		var product = []string{}
 		prdct := fmt.Sprint(f.Name() + ": " + readKeyUnsafe("content", "news/"+f.Name()+"/") + ";")
-		fmt.Println(prdct)
 		product = append(product, prdct)
 		prdct = fmt.Sprintln(f.Name() + ": " + readKeyUnsafe("contentRaw", "news/"+f.Name()+"/") + ";")
 		product = append(product, prdct)
@@ -110,7 +109,7 @@ func getallnews(c echo.Context) error {
 		product = append(product, prdct)
 		prdct = fmt.Sprintln(f.Name() + ": " + readKeyUnsafe("heading", "news/"+f.Name()+"/") + ";")
 		product = append(product, prdct)
-		prdct = fmt.Sprintln(f.Name() + ": " + readKeyUnsafe("image", "products/"+f.Name()+"/") + ";")
+		prdct = fmt.Sprintln(f.Name() + ": " + readKeyUnsafe("image", "news/"+f.Name()+"/") + ";")
 		product = append(product, prdct)
 		joined := strings.Join(product, "")
 		products = append(products, joined)

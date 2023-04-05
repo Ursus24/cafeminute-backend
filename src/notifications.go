@@ -39,7 +39,7 @@ func addnotification(c echo.Context) error {
 }
 func fetchnotification(c echo.Context) error {
 	id := NotificationExists(time.Now().Format("2006-01-02 15:04"))
-	var notifications = []string{}
+	//var notifications = []string{}
 	if id == "nv" {
 		return c.String(http.StatusOK, "nv")
 	} else {
@@ -55,8 +55,8 @@ func fetchnotification(c echo.Context) error {
 		ntfctn = fmt.Sprintln(id + ": " + parseDate(readKeyUnsafe("date", "notifications/"+id+"/"), readKeyUnsafe("time", "notifications/"+id+"/")).String() + ";")
 		notification = append(notification, ntfctn)
 		joined := strings.Join(notification, "")
-		notifications = append(notification, joined)
-		return c.String(http.StatusOK, strings.Join(notifications, "|"))
+		//notifications = append(notification, joined)
+		return c.String(http.StatusOK, joined)
 	}
 }
 
