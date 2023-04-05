@@ -92,29 +92,30 @@ func getnews(c echo.Context) error {
 	news = append(news, nws)
 	return c.String(http.StatusOK, strings.Join(news, ""))
 }
-
 func getallnews(c echo.Context) error {
-	var news = []string{}
+	var products = []string{}
 	files, err := os.ReadDir("news/")
 	if err != nil {
 		log.Fatal(err)
 	}
+
 	for _, f := range files {
-		var new = []string{}
-		nws := fmt.Sprint(f.Name() + ": " + readKeyUnsafe("content", "news/"+f.Name()+"/") + ";")
-		news = append(new, nws)
-		nws = fmt.Sprintln(f.Name() + ": " + readKeyUnsafe("heading", "news/"+f.Name()+"/") + ";")
-		news = append(news, nws)
-		nws = fmt.Sprintln(f.Name() + ": " + readKeyUnsafe("contentRaw", "news/"+f.Name()+"/") + ";")
-		news = append(new, nws)
-		nws = fmt.Sprintln(f.Name() + ": " + readKeyUnsafe("image", "news/"+f.Name()+"/") + ";")
-		news = append(news, nws)
-		nws = fmt.Sprintln(f.Name() + ": " + readKeyUnsafe("date", "news/"+f.Name()+"/") + ";")
-		news = append(news, nws)
-		joined := strings.Join(news, "")
-		news = append(news, joined)
+		var product = []string{}
+		prdct := fmt.Sprint(f.Name() + ": " + readKeyUnsafe("content", "news/"+f.Name()+"/") + ";")
+		fmt.Println(prdct)
+		product = append(product, prdct)
+		prdct = fmt.Sprintln(f.Name() + ": " + readKeyUnsafe("contentRaw", "news/"+f.Name()+"/") + ";")
+		product = append(product, prdct)
+		prdct = fmt.Sprintln(f.Name() + ": " + readKeyUnsafe("date", "news/"+f.Name()+"/") + ";")
+		product = append(product, prdct)
+		prdct = fmt.Sprintln(f.Name() + ": " + readKeyUnsafe("heading", "news/"+f.Name()+"/") + ";")
+		product = append(product, prdct)
+		prdct = fmt.Sprintln(f.Name() + ": " + readKeyUnsafe("image", "products/"+f.Name()+"/") + ";")
+		product = append(product, prdct)
+		joined := strings.Join(product, "")
+		products = append(products, joined)
 	}
-	return c.String(http.StatusOK, strings.Join(news, "|\n"))
+	return c.String(http.StatusOK, strings.Join(products, "|\n"))
 }
 
 func listnews(c echo.Context) error {
