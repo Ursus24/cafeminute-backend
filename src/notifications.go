@@ -158,7 +158,7 @@ func NotificationExists(timeOfNot string) string {
 	fmt.Println(timeOfNot)
 	fmt.Println(dates)
 	if contains(dates, timeOfNot) {
-		return IDs[sort.StringSlice(dates).Search(timeOfNot)]
+		return IDs[(sort.StringSlice(dates).Search(timeOfNot))-1]
 	}
 	return "nv"
 }
