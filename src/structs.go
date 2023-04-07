@@ -26,6 +26,7 @@ type addNews struct {
 	HEADING string `json:"heading" xml:"heading" form:"heading" query:"heading"`
 	CONTENT string `json:"content" xml:"content" form:"content" query:"content"`
 	IMAGE   string `json:"image" xml:"image" form:"image" query:"image"`
+	EVENT   string `json:"event" xml:"event" form:"event" query:"event"`
 }
 
 type getProduct struct {
@@ -75,6 +76,7 @@ type removeProduct struct {
 type setOpen struct {
 	PSWD string `json:"pswd" xml:"pswd" form:"pswd" query:"pswd"`
 }
+
 type setClosed struct {
 	PSWD string `json:"pswd" xml:"pswd" form:"pswd" query:"pswd"`
 }

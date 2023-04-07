@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strconv"
 	"strings"
 	"time"
 
@@ -20,10 +21,10 @@ func addnews(c echo.Context) error {
 		return err
 	}
 	if p.PSWD == serverpswd {
-		if p.HEADING == "" || p.CONTENT == "" || p.IMAGE == "" {
+		if p.HEADING == "" || p.CONTENT == "" || p.IMAGE == "" || p.EVENT == "" && p.EVENT != "true" && p.EVENT != "false" {
 			return c.String(http.StatusOK, "incomplete data. Missing something?")
 		}
-		storeNews(p.HEADING, p.CONTENT, p.IMAGE)
+		storeNews(p.HEADING, p.CONTENT, p.IMAGE, p.EVENT)
 		return c.String(http.StatusOK, "success")
 	}
 	return c.String(http.StatusOK, "forbidden")
@@ -44,7 +45,7 @@ func removenews(c echo.Context) error {
 	return c.String(http.StatusOK, ("forbidden"))
 }
 
-func storeNews(heading string, content string, image string) {
+func storeNews(heading string, content string, image string, event string) {
 	id := genIDnews()
 	createDir("news/" + id)
 	addKeyUnsafe("heading", heading, "news/"+id)
@@ -52,6 +53,12 @@ func storeNews(heading string, content string, image string) {
 	addKeyUnsafe("contentRaw", stripmd.Strip(content), "news/"+id)
 	addKeyUnsafe("image", image, "news/"+id)
 	addKeyUnsafe("date", time.Now().Format("2006-01-02"), "news/"+id)
+	addKeyUnsafe("event", event, "news/"+id)
+	if event == "true" {
+		addKeyUnsafe("participants", "0", "news/"+id)
+	} else {
+		addKeyUnsafe("participants", "nv", "news/"+id)
+	}
 }
 
 func genIDnews() string {
@@ -151,4 +158,50 @@ func changenews(c echo.Context) error {
 	}
 
 	return c.String(http.StatusOK, "forbidden")
+}
+
+func addparticipant(c echo.Context) error {
+
+	p := new(removeNews)
+	if err := c.Bind(p); err != nil {
+		return err
+	}
+
+	if p.PSWD == serverpswd {
+
+		old := readKeyUnsafe("participants", "news/"+p.ID+"/")
+		fmt.Println(old)
+		if old != "nv" {
+			new, _ := strconv.Atoi(old)
+			new = new + 1
+			newstring := fmt.Sprint(new)
+			changeKeyUnsafe("participants", newstring, "news/"+p.ID+"/")
+			return c.String(http.StatusOK, "success")
+		}
+		return c.String(http.StatusOK, "news with id is not an event")
+
+	}
+	return c.String(http.StatusOK, "forbidden")
+
+}
+
+func removeparticipant(c echo.Context) error {
+	p := new(removeNews)
+	if err := c.Bind(p); err != nil {
+		return err
+	}
+	if p.PSWD == serverpswd {
+		old := readKeyUnsafe("participants", "news/"+p.ID)
+		if old != "nv" {
+			new, _ := strconv.Atoi(old)
+			new = new - 1
+			newstring := fmt.Sprint(new)
+			changeKeyUnsafe("participants", newstring, "news/"+p.ID+"/")
+			return c.String(http.StatusOK, "success")
+		}
+		return c.String(http.StatusOK, "news with id is not an event")
+
+	}
+	return c.String(http.StatusOK, "forbidden")
+
 }

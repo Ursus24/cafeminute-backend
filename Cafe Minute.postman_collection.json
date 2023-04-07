@@ -417,7 +417,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"heading\" : \"len stinkt\",\n    \"content\" : \"len developer der Cafe Minute App stinkt\",\n    \"date\" : \"13.12.2023\",\n    \"image\" : \"sollte link sein lel\"\n}",
+							"raw": "{\n    \"pswd\" : \"CDSLLM0qL&KS2RjhgVSLw^hSvehR0UlPZ6wOz!CMS9x2oJELmU\",\n    \"heading\" : \"annanas\",\n    \"content\" : \"dies das annanas\",\n    \"image\" : \"https://d2j6dbq0eux0bg.cloudfront.net/images/32813036/3132629240.jpg\",\n    \"event\" : \"true\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -488,7 +488,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": ""
+							"raw": "{{url_base}}/getallnews",
+							"host": [
+								"{{url_base}}"
+							],
+							"path": [
+								"getallnews"
+							]
 						}
 					},
 					"response": []
@@ -499,7 +505,65 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": ""
+							"raw": "{{url_base}}/listnews",
+							"host": [
+								"{{url_base}}"
+							],
+							"path": [
+								"listnews"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addparticipant",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"pswd\" : \"CDSLLM0qL&KS2RjhgVSLw^hSvehR0UlPZ6wOz!CMS9x2oJELmU\",\n    \"id\" : \"1GrXX\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_base}}/addparticipant",
+							"host": [
+								"{{url_base}}"
+							],
+							"path": [
+								"addparticipant"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "removeparticipant",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"pswd\" : \"CDSLLM0qL&KS2RjhgVSLw^hSvehR0UlPZ6wOz!CMS9x2oJELmU\",\n    \"id\" : \"1GrXX\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_base}}/removeparticipant",
+							"host": [
+								"{{url_base}}"
+							],
+							"path": [
+								"removeparticipant"
+							]
 						}
 					},
 					"response": []
@@ -511,7 +575,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"id\" : \"\",\n    \"key\" : \"\",\n    \"value\" : \"\"\n}",
+							"raw": "{\n    \"id\" : \"myP8F\",\n    \"key\" : \"heading\",\n    \"value\" : \"sssssssssssssssssssssssss\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"

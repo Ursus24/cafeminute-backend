@@ -188,19 +188,3 @@ func genIDproduct() string {
 	}
 	return res
 }
-
-func genName(title string) string {
-	res := fmt.Sprintln(strings.ReplaceAll(title, " ", ""))
-	res = strings.ToLower(res)
-	return res
-}
-
-func createDir(dir string) {
-	path := dir
-	if _, err := os.Stat(path); errors.Is(err, os.ErrNotExist) {
-		err := os.MkdirAll(path, os.ModePerm)
-		if err != nil {
-			log.Println(err)
-		}
-	}
-}
