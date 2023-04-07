@@ -32,11 +32,14 @@ func addproduct(c echo.Context) error {
 	if err := c.Bind(p); err != nil {
 		return err
 	}
-	if p.TITLE == "" || p.PRIZE == "" || p.DESCRIPTION == "" || p.CALORIES == "" || p.IMAGE == "" {
-		return c.String(http.StatusOK, "incomplete data. Missing something?")
+	if string(p.PSWD) == serverpswd {
+		if p.TITLE == "" || p.PRIZE == "" || p.DESCRIPTION == "" || p.CALORIES == "" || p.IMAGE == "" {
+			return c.String(http.StatusOK, "incomplete data. Missing something?")
+		}
+		storeProduct(p.TITLE, p.PRIZE, p.ALLERGENIC, p.DESCRIPTION, p.CALORIES, p.SALE, p.IMAGE)
+		return c.String(http.StatusOK, "success")
 	}
-	storeProduct(p.TITLE, p.PRIZE, p.ALLERGENIC, p.DESCRIPTION, p.CALORIES, p.SALE, p.IMAGE)
-	return c.String(http.StatusOK, "success")
+	return c.String(http.StatusOK, "forbidden")
 }
 
 func changeproduct(c echo.Context) error {
@@ -44,12 +47,15 @@ func changeproduct(c echo.Context) error {
 	if err := c.Bind(p); err != nil {
 		return err
 	}
-	if p.ID == "" || p.KEY == "" || p.VALUE == "" {
-		return c.String(http.StatusOK, "incomplete data. Missing something?")
+	if string(p.PSWD) == serverpswd {
+		if p.ID == "" || p.KEY == "" || p.VALUE == "" {
+			return c.String(http.StatusOK, "incomplete data. Missing something?")
+		}
+		dir := "products/" + p.ID
+		changeKeyUnsafe(dir, p.KEY, p.VALUE)
+		return c.String(http.StatusOK, "success")
 	}
-	dir := "products/" + p.ID
-	changeKeyUnsafe(dir, p.KEY, p.VALUE)
-	return c.String(http.StatusOK, "success")
+	return c.String(http.StatusOK, "forbidden")
 }
 
 func getproduct(c echo.Context) error {
@@ -80,15 +86,18 @@ func getproduct(c echo.Context) error {
 }
 
 func removeproduct(c echo.Context) error {
-	p := new(getProduct)
+	p := new(removeProduct)
 	if err := c.Bind(p); err != nil {
 		return err
 	}
-	if _, err := os.Stat("products/" + string(p.ID)); errors.Is(err, os.ErrNotExist) {
-		return c.String(http.StatusOK, ("invalid ID"))
+	if string(p.PSWD) == serverpswd {
+		if _, err := os.Stat("products/" + string(p.ID)); errors.Is(err, os.ErrNotExist) {
+			return c.String(http.StatusOK, ("invalid ID"))
+		}
+		_ = os.RemoveAll("products/" + p.ID)
+		return c.String(http.StatusOK, ("removed"))
 	}
-	_ = os.RemoveAll("products/" + p.ID)
-	return c.String(http.StatusOK, ("removed"))
+	return c.String(http.StatusOK, "forbidden")
 }
 
 func getproducts(c echo.Context) error {

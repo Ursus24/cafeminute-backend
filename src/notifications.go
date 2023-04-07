@@ -20,22 +20,26 @@ func addnotification(c echo.Context) error {
 	if err := c.Bind(n); err != nil {
 		return err
 	}
-	if n.HEADING == "" || n.CONTENT == "" || n.DATE == "" || n.TIME == "" {
-		return c.String(http.StatusOK, "incomplete data. Missing something?")
-	}
+	if n.PSWD == serverpswd {
 
-	if !checkDate(n.DATE) {
-		return c.String(http.StatusOK, "date is not a date. check input")
-	}
+		if n.HEADING == "" || n.CONTENT == "" || n.DATE == "" || n.TIME == "" {
+			return c.String(http.StatusOK, "incomplete data. Missing something?")
+		}
 
-	if !checkTime(n.TIME) {
-		return c.String(http.StatusOK, "time is not a time. check input")
+		if !checkDate(n.DATE) {
+			return c.String(http.StatusOK, "date is not a date. check input")
+		}
+
+		if !checkTime(n.TIME) {
+			return c.String(http.StatusOK, "time is not a time. check input")
+		}
+		if NotificationExists(parseDate(n.DATE, n.TIME).String()[0:16]) == "nv" {
+			storeNotification(n.HEADING, n.CONTENT, n.DATE, n.TIME, parseDate(n.DATE, n.TIME).String())
+			return c.String(http.StatusOK, "success")
+		}
+		return c.String(http.StatusOK, "only one notification can be scheduled per minute")
 	}
-	if NotificationExists(parseDate(n.DATE, n.TIME).String()[0:16]) == "nv" {
-		storeNotification(n.HEADING, n.CONTENT, n.DATE, n.TIME, parseDate(n.DATE, n.TIME).String())
-		return c.String(http.StatusOK, "success")
-	}
-	return c.String(http.StatusOK, "only one notification can be scheduled per minute")
+	return c.String(http.StatusOK, "forbidden")
 }
 func fetchnotification(c echo.Context) error {
 	id := NotificationExists(time.Now().Format("2006-01-02 15:04"))
@@ -65,12 +69,16 @@ func changenotification(c echo.Context) error {
 	if err := c.Bind(p); err != nil {
 		return err
 	}
-	if p.ID == "" || p.KEY == "" || p.VALUE == "" {
-		return c.String(http.StatusOK, "incomplete data. Missing something?")
+	if p.PSWD == serverpswd {
+		if p.ID == "" || p.KEY == "" || p.VALUE == "" {
+			return c.String(http.StatusOK, "incomplete data. Missing something?")
+		}
+		dir := "notifications/" + p.ID
+		changeKeyUnsafe(dir, p.KEY, p.VALUE)
+		return c.String(http.StatusOK, "success")
 	}
-	dir := "notifications/" + p.ID
-	changeKeyUnsafe(dir, p.KEY, p.VALUE)
-	return c.String(http.StatusOK, "success")
+	return c.String(http.StatusOK, "forbidden")
+
 }
 
 func getnotifications(c echo.Context) error {
@@ -99,15 +107,19 @@ func getnotifications(c echo.Context) error {
 }
 
 func removenotification(c echo.Context) error {
-	p := new(getNotification)
+	p := new(removeNotification)
 	if err := c.Bind(p); err != nil {
 		return err
 	}
-	if _, err := os.Stat("notifications/" + string(p.ID)); errors.Is(err, os.ErrNotExist) {
-		return c.String(http.StatusOK, ("invalid ID"))
+	if p.PSWD == serverpswd {
+		if _, err := os.Stat("notifications/" + string(p.ID)); errors.Is(err, os.ErrNotExist) {
+			return c.String(http.StatusOK, ("invalid ID"))
+		}
+		_ = os.RemoveAll("notifications/" + p.ID)
+		return c.String(http.StatusOK, ("removed"))
 	}
-	_ = os.RemoveAll("notifications/" + p.ID)
-	return c.String(http.StatusOK, ("removed"))
+
+	return c.String(http.StatusOK, ("forbidden"))
 }
 
 func storeNotification(heading string, content string, date string, time string, timefmt string) {

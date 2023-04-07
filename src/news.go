@@ -19,23 +19,29 @@ func addnews(c echo.Context) error {
 	if err := c.Bind(p); err != nil {
 		return err
 	}
-	if p.HEADING == "" || p.CONTENT == "" || p.IMAGE == "" {
-		return c.String(http.StatusOK, "incomplete data. Missing something?")
+	if p.PSWD == serverpswd {
+		if p.HEADING == "" || p.CONTENT == "" || p.IMAGE == "" {
+			return c.String(http.StatusOK, "incomplete data. Missing something?")
+		}
+		storeNews(p.HEADING, p.CONTENT, p.IMAGE)
+		return c.String(http.StatusOK, "success")
 	}
-	storeNews(p.HEADING, p.CONTENT, p.IMAGE)
-	return c.String(http.StatusOK, "success")
+	return c.String(http.StatusOK, "forbidden")
 }
 
 func removenews(c echo.Context) error {
-	p := new(getNews)
+	p := new(removeNews)
 	if err := c.Bind(p); err != nil {
 		return err
 	}
-	if _, err := os.Stat("news/" + string(p.ID)); errors.Is(err, os.ErrNotExist) {
-		return c.String(http.StatusOK, ("invalid ID"))
+	if p.PSWD == serverpswd {
+		if _, err := os.Stat("news/" + string(p.ID)); errors.Is(err, os.ErrNotExist) {
+			return c.String(http.StatusOK, ("invalid ID"))
+		}
+		_ = os.RemoveAll("news/" + p.ID)
+		return c.String(http.StatusOK, ("removed"))
 	}
-	_ = os.RemoveAll("news/" + p.ID)
-	return c.String(http.StatusOK, ("removed"))
+	return c.String(http.StatusOK, ("forbidden"))
 }
 
 func storeNews(heading string, content string, image string) {
@@ -135,10 +141,14 @@ func changenews(c echo.Context) error {
 	if err := c.Bind(p); err != nil {
 		return err
 	}
-	if p.ID == "" || p.KEY == "" || p.VALUE == "" {
-		return c.String(http.StatusOK, "incomplete data. Missing something?")
+	if p.PSWD == serverpswd {
+		if p.ID == "" || p.KEY == "" || p.VALUE == "" {
+			return c.String(http.StatusOK, "incomplete data. Missing something?")
+		}
+		dir := "news/" + p.ID
+		changeKeyUnsafe(p.KEY, p.VALUE, dir)
+		return c.String(http.StatusOK, "success")
 	}
-	dir := "news/" + p.ID
-	changeKeyUnsafe(p.KEY, p.VALUE, dir)
-	return c.String(http.StatusOK, "success")
+
+	return c.String(http.StatusOK, "forbidden")
 }

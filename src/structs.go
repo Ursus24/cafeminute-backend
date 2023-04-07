@@ -3,6 +3,7 @@ package main
 var daysMonth = [12]int{31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31}
 
 type addProduct struct {
+	PSWD        string `json:"pswd" xml:"pswd" form:"pswd" query:"pswd"`
 	TITLE       string `json:"title" xml:"title" form:"title" query:"title"`
 	ALLERGENIC  string `json:"allergenic" xml:"allergenic" form:"allergenic" query:"allergenic"`
 	PRIZE       string `json:"prize" xml:"prize" form:"prize" query:"prize"`
@@ -13,6 +14,7 @@ type addProduct struct {
 }
 
 type addNotification struct {
+	PSWD    string `json:"pswd" xml:"pswd" form:"pswd" query:"pswd"`
 	HEADING string `json:"heading" xml:"heading" form:"heading" query:"heading"`
 	CONTENT string `json:"content" xml:"content" form:"content" query:"content"`
 	DATE    string `json:"date" xml:"date" form:"date" query:"date"`
@@ -20,6 +22,7 @@ type addNotification struct {
 }
 
 type addNews struct {
+	PSWD    string `json:"pswd" xml:"pswd" form:"pswd" query:"pswd"`
 	HEADING string `json:"heading" xml:"heading" form:"heading" query:"heading"`
 	CONTENT string `json:"content" xml:"content" form:"content" query:"content"`
 	IMAGE   string `json:"image" xml:"image" form:"image" query:"image"`
@@ -32,25 +35,46 @@ type getProduct struct {
 type getNews struct {
 	ID string `json:"id" xml:"id" form:"id" query:"id"`
 }
-
+type removeNews struct {
+	ID   string `json:"id" xml:"id" form:"id" query:"id"`
+	PSWD string `json:"pswd" xml:"pswd" form:"pswd" query:"pswd"`
+}
 type getNotification struct {
 	ID string `json:"id" xml:"id" form:"id" query:"id"`
 }
+type removeNotification struct {
+	ID   string `json:"id" xml:"id" form:"id" query:"id"`
+	PSWD string `json:"pswd" xml:"pswd" form:"pswd" query:"pswd"`
+}
 
 type changeNotifications struct {
+	PSWD  string `json:"pswd" xml:"pswd" form:"pswd" query:"pswd"`
 	ID    string `json:"id" xml:"id" form:"id" query:"id"`
 	KEY   string `json:"key" xml:"key" form:"key" query:"key"`
 	VALUE string `json:"value" xml:"value" form:"value" query:"value"`
 }
 
 type changeNews struct {
+	PSWD  string `json:"pswd" xml:"pswd" form:"pswd" query:"pswd"`
 	ID    string `json:"id" xml:"id" form:"id" query:"id"`
 	KEY   string `json:"key" xml:"key" form:"key" query:"key"`
 	VALUE string `json:"value" xml:"value" form:"value" query:"value"`
 }
 
 type changeProduct struct {
+	PSWD  string `json:"pswd" xml:"pswd" form:"pswd" query:"pswd"`
 	ID    string `json:"id" xml:"id" form:"id" query:"id"`
 	KEY   string `json:"key" xml:"key" form:"key" query:"key"`
 	VALUE string `json:"value" xml:"value" form:"value" query:"value"`
+}
+type removeProduct struct {
+	PSWD string `json:"pswd" xml:"pswd" form:"pswd" query:"pswd"`
+	ID   string `json:"id" xml:"id" form:"id" query:"id"`
+}
+
+type setOpen struct {
+	PSWD string `json:"pswd" xml:"pswd" form:"pswd" query:"pswd"`
+}
+type setClosed struct {
+	PSWD string `json:"pswd" xml:"pswd" form:"pswd" query:"pswd"`
 }

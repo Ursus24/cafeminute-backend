@@ -13,11 +13,25 @@ func isopen(c echo.Context) error {
 }
 
 func setopen(c echo.Context) error {
-	open = "true"
-	return c.String(http.StatusOK, "set to open")
+	p := new(setOpen)
+	if err := c.Bind(p); err != nil {
+		return err
+	}
+	if string(p.PSWD) == serverpswd {
+		open = "true"
+		return c.String(http.StatusOK, "sucess")
+	}
+	return c.String(http.StatusOK, "forbidden")
 }
 
 func setclosed(c echo.Context) error {
-	open = "false"
-	return c.String(http.StatusOK, "set to closed")
+	p := new(setOpen)
+	if err := c.Bind(p); err != nil {
+		return err
+	}
+	if string(p.PSWD) == serverpswd {
+		open = "false"
+		return c.String(http.StatusOK, "success")
+	}
+	return c.String(http.StatusOK, "forbidden")
 }
