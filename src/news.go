@@ -124,6 +124,10 @@ func getallnews(c echo.Context) error {
 		product = append(product, prdct)
 		prdct = fmt.Sprintln(f.Name() + ": " + readKeyUnsafe("image", "news/"+f.Name()+"/") + ";")
 		product = append(product, prdct)
+		prdct = fmt.Sprintln(f.Name() + ": " + readKeyUnsafe("event", "news/"+f.Name()+"/") + ";")
+		product = append(product, prdct)
+		prdct = fmt.Sprintln(f.Name() + ": " + readKeyUnsafe("participants", "news/"+f.Name()+"/") + ";")
+		product = append(product, prdct)
 		joined := strings.Join(product, "")
 		products = append(products, joined)
 	}
