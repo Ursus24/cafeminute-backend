@@ -39,7 +39,7 @@ func addnotification(c echo.Context) error {
 		}
 		return c.String(http.StatusOK, "only one notification can be scheduled per minute")
 	}
-	return c.String(http.StatusOK, "forbidden")
+	return c.String(http.StatusForbidden, "forbidden")
 }
 func fetchnotification(c echo.Context) error {
 	id := NotificationExists(time.Now().Format("2006-01-02 15:04"))
@@ -77,7 +77,7 @@ func changenotification(c echo.Context) error {
 		changeKeyUnsafe(dir, p.KEY, p.VALUE)
 		return c.String(http.StatusOK, "success")
 	}
-	return c.String(http.StatusOK, "forbidden")
+	return c.String(http.StatusForbidden, "forbidden")
 
 }
 

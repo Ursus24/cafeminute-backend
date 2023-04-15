@@ -23,19 +23,15 @@ func main() {
 		return c.String(http.StatusOK, "Root Route!")
 	})
 
-	e.POST("setopen", setopen)     //working //secured
-	e.POST("setclosed", setclosed) //working //secured
-	e.GET("isopen", isopen)        //working
-
-	e.POST("customerenters", customerenters) //working //TODO: secure
-	e.POST("customerleaves", customerleaves) //working //TODO: secure
-	e.POST("customerreset", customerreset)   //working //TODO: secure
-	e.GET("customercount", customercount)    //working
-
-	e.POST("addproduct", addproduct)    //working //secured
-	e.GET("listproducts", listproducts) //working
-	e.GET("getproducts", getproducts)   //working
-	e.GET("getproduct", getproduct)     //working
+	e.POST("setopen", setopen)           //working //secured
+	e.POST("setclosed", setclosed)       //working //secured
+	e.GET("isopen", isopen)              //working
+	e.POST("setcustomers", setcustomers) //working //secured
+	e.GET("getcustomers", getcustomers)  //working
+	e.POST("addproduct", addproduct)     //working //secured
+	e.GET("listproducts", listproducts)  //working
+	e.GET("getproducts", getproducts)    //working
+	e.GET("getproduct", getproduct)      //working
 	e.GET("getproductids", getproductids)
 	e.PATCH("changeproduct", changeproduct)  //secured
 	e.DELETE("removeproduct", removeproduct) //working //secured

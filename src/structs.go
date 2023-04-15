@@ -77,6 +77,11 @@ type setOpen struct {
 	PSWD string `json:"pswd" xml:"pswd" form:"pswd" query:"pswd"`
 }
 
+type customers struct {
+	PSWD      string `json:"pswd" xml:"pswd" form:"pswd" query:"pswd"`
+	CUSTOMERS string `json:"customers" xml:"customers" form:"customers" query:"customers"`
+}
+
 type setClosed struct {
 	PSWD string `json:"pswd" xml:"pswd" form:"pswd" query:"pswd"`
 }

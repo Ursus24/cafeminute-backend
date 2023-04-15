@@ -27,7 +27,7 @@ func addnews(c echo.Context) error {
 		storeNews(p.HEADING, p.CONTENT, p.IMAGE, p.EVENT)
 		return c.String(http.StatusOK, "success")
 	}
-	return c.String(http.StatusOK, "forbidden")
+	return c.String(http.StatusForbidden, "forbidden")
 }
 
 func removenews(c echo.Context) error {
@@ -161,7 +161,7 @@ func changenews(c echo.Context) error {
 		return c.String(http.StatusOK, "success")
 	}
 
-	return c.String(http.StatusOK, "forbidden")
+	return c.String(http.StatusForbidden, "forbidden")
 }
 
 func addparticipant(c echo.Context) error {
@@ -185,7 +185,7 @@ func addparticipant(c echo.Context) error {
 		return c.String(http.StatusOK, "news with id is not an event")
 
 	}
-	return c.String(http.StatusOK, "forbidden")
+	return c.String(http.StatusForbidden, "forbidden")
 
 }
 
@@ -206,6 +206,6 @@ func removeparticipant(c echo.Context) error {
 		return c.String(http.StatusOK, "news with id is not an event")
 
 	}
-	return c.String(http.StatusOK, "forbidden")
+	return c.String(http.StatusForbidden, "forbidden")
 
 }

@@ -39,7 +39,7 @@ func addproduct(c echo.Context) error {
 		storeProduct(p.TITLE, p.PRIZE, p.ALLERGENIC, p.DESCRIPTION, p.CALORIES, p.SALE, p.IMAGE)
 		return c.String(http.StatusOK, "success")
 	}
-	return c.String(http.StatusOK, "forbidden")
+	return c.String(http.StatusForbidden, "forbidden")
 }
 
 func changeproduct(c echo.Context) error {
@@ -55,7 +55,7 @@ func changeproduct(c echo.Context) error {
 		changeKeyUnsafe(dir, p.KEY, p.VALUE)
 		return c.String(http.StatusOK, "success")
 	}
-	return c.String(http.StatusOK, "forbidden")
+	return c.String(http.StatusForbidden, "forbidden")
 }
 
 func getproduct(c echo.Context) error {
@@ -97,7 +97,7 @@ func removeproduct(c echo.Context) error {
 		_ = os.RemoveAll("products/" + p.ID)
 		return c.String(http.StatusOK, ("removed"))
 	}
-	return c.String(http.StatusOK, "forbidden")
+	return c.String(http.StatusForbidden, "forbidden")
 }
 
 func getproducts(c echo.Context) error {

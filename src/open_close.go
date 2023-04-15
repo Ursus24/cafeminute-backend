@@ -21,7 +21,7 @@ func setopen(c echo.Context) error {
 		open = "true"
 		return c.String(http.StatusOK, "sucess")
 	}
-	return c.String(http.StatusOK, "forbidden")
+	return c.String(http.StatusForbidden, "forbidden")
 }
 
 func setclosed(c echo.Context) error {
@@ -33,5 +33,5 @@ func setclosed(c echo.Context) error {
 		open = "false"
 		return c.String(http.StatusOK, "success")
 	}
-	return c.String(http.StatusOK, "forbidden")
+	return c.String(http.StatusForbidden, "forbidden")
 }
