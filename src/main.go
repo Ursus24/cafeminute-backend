@@ -24,6 +24,8 @@ func main() {
 	})
 
 	e.POST("setopen", setopen)           //working //secured
+	e.POST("addschedule", add_schedule)  //working //secured
+	e.GET("getschedule", get_schedule)   //working
 	e.POST("setclosed", setclosed)       //working //secured
 	e.GET("isopen", isopen)              //working
 	e.POST("setcustomers", setcustomers) //working //secured

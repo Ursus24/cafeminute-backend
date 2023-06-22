@@ -20,7 +20,14 @@ type addNotification struct {
 	DATE    string `json:"date" xml:"date" form:"date" query:"date"`
 	TIME    string `json:"time" xml:"time" form:"time" query:"time"`
 }
-
+type addSchedule struct {
+	MON  string `json:"mon" xml:"mon" form:"mon" query:"mon"`
+	TUE  string `json:"tue" xml:"tue" form:"tue" query:"tue"`
+	WED  string `json:"wed" xml:"wed" form:"wed" query:"wed"`
+	THU  string `json:"thu" xml:"thu" form:"thu" query:"thu"`
+	FRI  string `json:"fri" xml:"fri" form:"fri" query:"fri"`
+	PSWD string `json:"pswd" xml:"pswd" form:"pswd" query:"pswd"`
+}
 type addNews struct {
 	PSWD    string `json:"pswd" xml:"pswd" form:"pswd" query:"pswd"`
 	HEADING string `json:"heading" xml:"heading" form:"heading" query:"heading"`
