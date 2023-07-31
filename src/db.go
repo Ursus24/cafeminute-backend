@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"log"
@@ -14,6 +15,52 @@ var (
 	err     error
 )
 
+func addDocUnsafe(data map[string]string, name string, dir string) error {
+	toJSON := "{"
+	for k, v := range data {
+		toJSON = toJSON + "\"" + k + "\":\"" + v + "\","
+	}
+	toJSON = toJSON[:len(toJSON)-1] + "}"
+	//create document directory if it doesn't exist
+	var document *os.File
+	var err error
+	if dir == "" {
+		_ = os.Mkdir("documents", os.ModePerm)
+		document, err = os.Create("documents/" + name + ".json")
+	} else {
+		_ = os.Mkdir("documents", os.ModePerm)
+		_ = os.Mkdir("documents/"+dir, os.ModePerm)
+		document, err = os.Create("documents/" + dir + "/" + name + ".json")
+	}
+	if err != nil {
+		document.Close()
+		return err
+	}
+	_, err = document.WriteString(toJSON)
+	document.Close()
+
+	if err != nil {
+		return err
+	}
+	return nil
+}
+func readDocUnsafe(name string, dir string) (map[string]string, error) {
+	if !fileExists("documents/" + dir + "/" + name + ".json") {
+		return nil, os.ErrNotExist
+	}
+	document, err := os.Open("documents/" + name + ".json")
+	if err != nil {
+		return nil, err
+	}
+	defer document.Close()
+	var data map[string]string
+	decoder := json.NewDecoder(document)
+	err = decoder.Decode(&data)
+	if err != nil {
+		return nil, err
+	}
+	return data, nil
+}
 func readKey(key string, dir string) string {
 	if hasKey(key, dir) {
 		file, err := os.Open(dir + "/" + key)
@@ -124,4 +171,11 @@ func readKeyUnsafe(key string, dir string) string {
 		return ret
 	}
 	return ""
+}
+func fileExists(filename string) bool {
+	info, err := os.Stat(filename)
+	if os.IsNotExist(err) {
+		return false
+	}
+	return !info.IsDir()
 }
