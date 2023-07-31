@@ -61,6 +61,11 @@ func readDocUnsafe(name string, dir string) (map[string]string, error) {
 	}
 	return data, nil
 }
+func removeDoc(name string, dir string) {
+	if fileExists("documents/" + dir + "/" + name + ".json") {
+		os.Remove("documents/" + dir + "/" + name + ".json")
+	}
+}
 func readKey(key string, dir string) string {
 	if hasKey(key, dir) {
 		file, err := os.Open(dir + "/" + key)
