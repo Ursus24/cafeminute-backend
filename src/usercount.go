@@ -8,7 +8,7 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-var customer_level = 0
+var customer_level = 1
 
 func getcustomers(c echo.Context) error {
 
