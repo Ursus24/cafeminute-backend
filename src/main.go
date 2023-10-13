@@ -12,7 +12,7 @@ import (
 	"github.com/labstack/echo/v4/middleware"
 )
 
-var serverpswd = "CDSLLM0qL&KS2RjhgVSLw^hSvehR0UlPZ6wOz!CMS9x2oJELmU"
+var serverpswd = "123"
 
 func main() {
 	e := echo.New()
@@ -23,13 +23,13 @@ func main() {
 		return c.String(http.StatusOK, "Root Route!")
 	})
 
-	e.POST("setopen", setopen)           //working //secured
-	e.POST("addschedule", add_schedule)  //working //secured
-	e.GET("getschedule", get_schedule)   //working
-	e.POST("setclosed", setclosed)       //working //secured
-	e.GET("isopen", isopen)              //working
-	e.POST("setcustomers", setcustomers) //working //secured
-	e.GET("getcustomers", getcustomers)  //working
+	e.POST("setopen", setopen)           //working //secured //rusted
+	e.POST("addschedule", add_schedule)  //working //secured //rusted
+	e.GET("getschedule", get_schedule)   //working //rusted
+	e.POST("setclosed", setclosed)       //working //secured //rusted
+	e.GET("isopen", isopen)              //working //rusted
+	e.POST("setcustomers", setcustomers) //working //secured //rusted
+	e.GET("getcustomers", getcustomers)  //working //rusted
 	e.POST("addproduct", addproduct)     //working //secured
 	e.GET("listproducts", listproducts)  //working
 	e.GET("getproducts", getproducts)    //working
@@ -53,7 +53,7 @@ func main() {
 	e.PATCH("addparticipant", addparticipant)
 	e.PATCH("removeparticipant", removeparticipant)
 	e.DELETE("removenews", removenews) //working //secured
-	e.Logger.Fatal(e.Start(":1312"))
+	e.Logger.Fatal(e.Start(":13120"))
 }
 
 func genName(title string) string {
